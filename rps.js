@@ -1,8 +1,13 @@
 //Declarations
+let playerSelection;
+let computerSelection;
 
 //Main
+playerSelection = window.prompt('Enter \'rock\', \'paper\', or \'scissors\'');
+computerSelection = computerPlay();
 
-computerPlay();
+console.log(playerSelection);
+console.log(computerSelection);
 
 //Functions
 function getRandomIntInclusive(min, max) {
@@ -12,19 +17,18 @@ function getRandomIntInclusive(min, max) {
 }
 
 function computerPlay() {
-  let compSelection = getRandomIntInclusive(0, 2);
-
-  switch (compSelection) {
+  switch (getRandomIntInclusive(0, 2)) {
     case 0:
-      console.log('rock');
-      break;
+      return 'rock';
     case 1:
-      console.log('paper');
-      break;
+      return 'paper';
     case 2:
-      console.log('scissors');
-      break;
-  }
+      return 'scissors';
+  }  
 }
+
+/*function playRound (playerSelection, computerSelection) {
+
+}*/
 
 
