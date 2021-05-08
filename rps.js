@@ -1,16 +1,6 @@
-//Declarations
-let playerSelection;
-let computerSelection;
 
 //Main
-playerSelection = window.prompt('Enter \'rock\', \'paper\', or \'scissors\'');
-computerSelection = computerPlay();
-playerSelection = playerSelection.toLowerCase(playerSelection);
-
-console.log(playerSelection);
-console.log(computerSelection);
-
-playRound(playerSelection, computerSelection);
+game();
 
 //Functions
 function getRandomIntInclusive(min, max) {
@@ -32,26 +22,57 @@ function computerPlay() {
 
 function playRound (playerSelection, computerSelection) {
   if(playerSelection === computerSelection){
-    console.log('Tie game!');
-    //break;
+    return 'Tie game!';
   } else if(playerSelection === 'rock' && computerSelection === 'scissors') {
-    console.log('Rock beats Scissors! You win!');
-    //break;
+    return 'Rock beats Scissors! You win!';
   } else if(playerSelection === 'rock' && computerSelection === 'paper') {
-    console.log('Paper beats Rock! Computer wins!');
-    //break;
+    return 'Paper beats Rock! Computer wins!';
   } else if(playerSelection === 'paper' && computerSelection === 'rock') {
-    console.log('Paper beats Rock! You win!');
-    //break;
+    return 'Paper beats Rock! You win!';
   } else if(playerSelection === 'paper' && computerSelection === 'scissors') {
-    console.log('Scissors beat Paper! Computer wins!');
-    //break;
+    return 'Scissors beat Paper! Computer wins!';
   } else if(playerSelection === 'scissors' && computerSelection === 'paper') {
-    console.log('Scissors beat Paper! You win!');
-    //break;
+    return 'Scissors beat Paper! You win!';
   } else if(playerSelection === 'scissors' && computerSelection === 'rock') {
-    console.log('Rock beats Scissors! Computer wins!');
-    //break;
+    return 'Rock beats Scissors! Computer wins!';
+  }
+}
+
+function game() {
+  let playerSelection;
+  let computerSelection;
+  let gamesPlayed;
+  let maxRounds = window.prompt('Please enter the number of rounds you want to play');
+  let playerScore = 0;
+  let computerScore = 0;
+  let roundResult;
+
+  maxRounds = parseInt(maxRounds);
+  
+  for(gamesPlayed = 0; gamesPlayed < maxRounds; gamesPlayed++) {
+    playerSelection = window.prompt('Enter \'rock\', \'paper\', or \'scissors\'');
+    computerSelection = computerPlay();
+    playerSelection = playerSelection.toLowerCase(playerSelection);
+
+    roundResult = playRound(playerSelection, computerSelection);
+
+    if(roundResult.search('Tie') >= 0) {
+      console.log(roundResult);
+    } else if(roundResult.search('You win') >= 0) {
+      playerScore++;
+      console.log(roundResult);
+    } else {
+      computerScore++;
+      console.log(roundResult);
+    }
+  }
+
+  if(playerScore === computerScore) {
+    console.log('Your Score: ' + playerScore + ' Computer Score: ' + computerScore + ' Tie Game!');
+  } else if(playerScore > computerScore) {
+    console.log('Your Score: ' + playerScore + ' Computer Score: ' + computerScore + ' You Win!');
+  } else {
+    console.log('Your Score: ' + playerScore + ' Computer Score: ' + computerScore + ' Computer Wins!')
   }
 }
 
